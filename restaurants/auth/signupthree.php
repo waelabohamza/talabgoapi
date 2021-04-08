@@ -27,5 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     );
 
     $count = updateData($table, $data, "restaurants_email = '$email'");
+    
     countresault($count) ; 
 }
