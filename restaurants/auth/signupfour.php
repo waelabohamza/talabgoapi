@@ -7,17 +7,20 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 $deliveryways = $data['deliveryways'];
 $email        = $data['email'];
+// GetId 
+$stmt = getData("restaurants", "restaurants_email", $email);
 
-$stmt  = $con->prepare("SELECT restaurants_id FROM restaurants WHERE restaurants_email = ?");
-$stmt->execute(array($email));
-$resid = $stmt->fetchColumn();
-$count = $stmt->rowCount();
-if ($count > 0) {
+if ($stmt['count'] > 0) {
+
+    $resid = $stmt['values']['restaurants_id'];
+
     foreach ($deliveryways as $val) {
-        $stmt2 = $con->prepare("INSERT INTO `rdtw`(`rdtw_res`, `rdtw_deliveryways`) VALUES ($resid , $val)");
-        $stmt2->execute();
+
+        $data = array("rdtw_res" => $resid, "rdtw_deliveryways" => $val);
+        $count =  insertData("rdtw", $data);
+        
     }
-    $count = $stmt2->rowCount();
+
     countresault($count);
 } else {
     failCount();
