@@ -383,7 +383,7 @@ function sendNotifySpecificRes($resid, $title, $message, $p_id, $p_name)
     $stmt->execute(array($resid));
     $ress = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($ress as $res) {
-        sendGCM($title, $message, $res['tokenres_token'], $p_id, $p_name);
+        sendGCM($title, $message, $res['tokens_token'], $p_id, $p_name);
     }
     insertNotifySpecifcCatInDatabase($title, $message, "restaurants", $resid);
 }
