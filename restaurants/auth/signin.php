@@ -10,9 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $count    = $data['count'];
         if ($count > 0){
             $count2 = insertToken($restaurants['restaurants_id'] , $token, "restaurants") ; 
-            if ($count2 > 0 ){
-             sendNotifySpecificUser($restaurants['restaurants_id'], "مرحبا", "مرحبا بك في تطبيق المطاعم الشامل", "", "") ; 
-            }
+           
+                sendNotifySpecificRes($restaurants['restaurants_id'], "مرحبا", "مرحبا بك في تطبيق المطاعم الشامل", "", "") ; 
+           
             echo json_encode(array("status" => "success", "restaurants" => $restaurants , "token" => $token));
         }else{
             failCount() ; 

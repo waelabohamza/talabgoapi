@@ -153,7 +153,7 @@ function maxId($column, $table)
 
 //===========================
 
-function signInWithEmailAndPassword($table, $columnemail, $columnpassword, $email, $password , $and )
+function signInWithEmailAndPassword($table, $columnemail, $columnpassword, $email, $password, $and)
 {
     global $con;
     $stmt = $con->prepare("SELECT * FROM $table WHERE $columnemail = ? AND $columnpassword = ? $and ");
@@ -345,7 +345,7 @@ function sendNotifySpecificUser($userid, $title, $message, $p_id, $p_name)
     global $con;
     $stmt = $con->prepare("SELECT users.users_id , tokens.* FROM users
                          INNER JOIN tokens ON tokens.tokens_sid = users.users_id
-                         WHERE users.users_id = ?");
+                         WHERE users.users_id = ? And tokens_type = 'users' ");
     $stmt->execute(array($userid));
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($users as $user) {
@@ -373,19 +373,20 @@ function sendNotifySpecificUser($userid, $title, $message, $p_id, $p_name)
 
 
 
-// function sendNotifySpecificRes($resid, $title, $message, $p_id, $p_name)
-// {
-//     global $con;
-//     $stmt = $con->prepare("SELECT restaurants.res_id , tokenres.* FROM restaurants
-//                          INNER JOIN tokenres ON tokenres.tokenres_res = restaurants.res_id
-//                          WHERE restaurants.res_id = ?");
-//     $stmt->execute(array($resid));
-//     $ress = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//     foreach ($ress as $res) {
-//         sendGCM($title, $message, $res['tokenres_token'], $p_id, $p_name);
-//     }
-//     insertNotifySpecifcCatInDatabase($title, $message, 1, $resid);
-// }
+function sendNotifySpecificRes($resid, $title, $message, $p_id, $p_name)
+{
+    global $con;
+    $stmt = $con->prepare("SELECT restaurants.restaurants_id , tokens.* FROM restaurants
+                           INNER JOIN tokens ON tokens.tokens_sid = restaurants.restaurants_id
+                           WHERE restaurants.restaurants_id = ? AND tokens_type = 'restaurants'
+                        ");
+    $stmt->execute(array($resid));
+    $ress = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($ress as $res) {
+        sendGCM($title, $message, $res['tokenres_token'], $p_id, $p_name);
+    }
+    insertNotifySpecifcCatInDatabase($title, $message, "restaurants", $resid);
+}
 
 
 
@@ -471,7 +472,7 @@ function image_data($imagerequset)
     return  $image;
 }
 
- 
+
 
 function edit_image($imagename, $imageold, $imagetmp, $directory)
 {
