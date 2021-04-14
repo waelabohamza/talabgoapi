@@ -153,10 +153,10 @@ function maxId($column, $table)
 
 //===========================
 
-function signInWithEmailAndPassword($table, $columnemail, $columnpassword, $email, $password)
+function signInWithEmailAndPassword($table, $columnemail, $columnpassword, $email, $password , $and )
 {
     global $con;
-    $stmt = $con->prepare("SELECT * FROM $table WHERE $columnemail = ? AND $columnpassword = ?  AND users_approve = 1 ");
+    $stmt = $con->prepare("SELECT * FROM $table WHERE $columnemail = ? AND $columnpassword = ? $and ");
     $stmt->execute(array($email, $password));
     $user  = $stmt->fetch(PDO::FETCH_ASSOC);
     $data = array();
