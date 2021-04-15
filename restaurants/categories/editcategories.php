@@ -3,6 +3,7 @@
 include "../../connect.php";
 
 $filedir = "categories";
+
 $table = "categories";
 
 
