@@ -2,9 +2,9 @@
 
 include "../../connect.php";
 
-$filedir = "categories";
+$filedir = "items";
 
-$table = "categoriesfood";
+$table = "itemsfood";
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -12,9 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $id             = superFilter($_POST['id']);
     $name           = superFilter($_POST['name']);
     $namear         = superFilter($_POST['namear']);
-    $categoriedata  = getData($table, "categoriesfood_id", $id);
+    $desc           = superFilter($_POST['desc']);
+    $descar         = superFilter($_POST['descar']);
+    $catid         = superFilter($_POST['catid']);
+    $categoriedata  = getData($table, "itemsfood_id", $id);
     $count          = $categoriedata['count'];
-    $imageold       = $categoriedata['values']['categoriesfood_image'];
+    $imageold       = $categoriedata['values']['itemsfood_image'];
 
 
     // $datauser  =  $user['data'];
@@ -34,12 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     // Request 
 
             $data = array(
-                "categoriesfood_name" => $name,
-                "categoriesfood_name_ar" => $namear,
-                "categoriesfood_image" => $imagename
+                "itemsfood_name"        =>  $name,
+                "itemsfood_name_ar"     =>  $namear,
+                "itemsfood_desc"        =>  $desc,
+                "itemsfood_desc_ar"     =>  $descar,
+                "itemsfood_image"       =>  $imagename,
+                "itemsfood_cat"         =>  $catid
             );
 
-            $where =  "categoriesfood_id = $id ";
+            $where =  "itemsfood_id = $id ";
 
             $count =  updateData($table, $data, $where);
 
@@ -50,9 +56,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         } else {
 
 
-            $data = array("categoriesfood_name" => $name, "categoriesfood_name_ar" => $namear,  "categoriesfood_image" => $imageold);
+            $data = array(
+                "itemsfood_name"        =>  $name,
+                "itemsfood_name_ar"     =>  $namear,
+                "itemsfood_desc"        =>  $desc,
+                "itemsfood_desc_ar"     =>  $descar,
+                "itemsfood_image"       =>  $imagename,
+                "itemsfood_cat"         =>  $catid
+            );
 
-            $where =  "categoriesfood_id = $id ";
+
+            $where =  "itemsfood_id = $id ";
 
             $count =  updateData($table, $data, $where);
         }
