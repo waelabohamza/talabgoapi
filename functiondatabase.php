@@ -121,6 +121,23 @@ function paginationLimit($getpage, $countrow)
     return $limit;
 }
 
+function filterResualt($get , $column ){
+
+    if (isset($get) && $get != null) {
+
+        $catid = $get;
+    
+        $and = "AND   $column  = '$get'  ";
+        
+    } else {
+    
+        $and = null;
+
+    }
+
+    return $and  ;     
+}
+
 function createJson($count, $values)
 {
     if ($count > 0) {

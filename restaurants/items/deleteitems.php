@@ -1,16 +1,16 @@
 <?php
 include "../../connect.php";
 
-$filedir = "categories";
-$table   = "categoriesfood";
+$filedir = "items";
+$table   = "itemsfood";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $id         = superFilter($_POST['id']);
-    $category   = getData($table, "categoriesfood_id", $id);
-    $imageold   = $category['values']['categoriesfood_image'];
-    $checkcat   = $category['count'];
+    $item   = getData($table, "itemsfood_id", $id);
+    $imageold   = $item['values']['itemsfood_image'];
+    $checkcat   = $item['count'];
     if ($checkcat > 0) {
-        $count = deleteData($table, "categoriesfood_id", $id);
+        $count = deleteData($table, "itemsfood_id", $id);
         if ($count > 0) {
             deleteFile($filedir, $imageold);
         }
