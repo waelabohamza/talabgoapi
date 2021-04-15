@@ -2,12 +2,12 @@
 
 include "../../connect.php";
 
-$table = "categories";
+$table = "categoriesfood";
 
 $resid = $_POST['resid'] ; 
 
 $limit = paginationLimit($_GET['page'] ?? null, 10000);
 
-$data = getAllData($table, "categories_restaurants = '$resid'  $limit ");
+$data = getAllData($table, "categoriesfood_restaurants = '$resid'  $limit ");
 
 createJson($data['count'], $data['values']);

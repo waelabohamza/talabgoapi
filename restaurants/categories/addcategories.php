@@ -4,7 +4,7 @@ include "../../connect.php";
 
 $filedir = "categories";
 
-$table   = "categories";
+$table   = "categoriesfood";
 
 $msgerrors = array();
 
@@ -26,10 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $namear  = superFilter($_POST['namear']);
 
     $data = array(
-        "categories_name" => $name,
-        "categories_name_ar" => $namear,
-        "categories_image" => $imagename,
-        "categories_restaurants" =>  $resid
+        "categoriesfood_name" => $name,
+        "categoriesfood_name_ar" => $namear,
+        "categoriesfood_image" => $imagename,
+        "categoriesfood_restaurants" =>  $resid
     );
     if (empty($msgerrors)) {
         $count = insertData($table, $data);

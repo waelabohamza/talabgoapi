@@ -2,15 +2,15 @@
 include "../../connect.php";
 
 $filedir = "categories";
-$table   = "categories";
+$table   = "categoriesfood";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $id         = superFilter($_POST['id']);
-    $category   = getData($table, "categories_id", $id);
-    $imageold   = $category['values']['categories_image'];
+    $category   = getData($table, "categoriesfood_id", $id);
+    $imageold   = $category['values']['categoriesfood_image'];
     $checkcat   = $category['count'];
     if ($checkcat > 0) {
-        $count = deleteData($table, "categories_id", $id);
+        $count = deleteData($table, "categoriesfood_id", $id);
         if ($count > 0) {
             deleteFile($filedir, $imageold);
         }

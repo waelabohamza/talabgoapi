@@ -4,7 +4,7 @@ include "../../connect.php";
 
 $filedir = "categories";
 
-$table = "categories";
+$table = "categoriesfood";
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -12,9 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $id             = superFilter($_POST['id']);
     $name           = superFilter($_POST['name']);
     $namear         = superFilter($_POST['namear']);
-    $categoriedata  = getData($table, "categories_id", $id);
+    $categoriedata  = getData($table, "categoriesfood_id", $id);
     $count          = $categoriedata['count'];
-    $imageold       = $categoriedata['values']['categories_image'];
+    $imageold       = $categoriedata['values']['categoriesfood_image'];
 
 
     // $datauser  =  $user['data'];
@@ -34,12 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     // Request 
 
             $data = array(
-                "categories_name" => $name,
-                "categories_name_ar" => $namear,
-                "categories_image" => $imagename
+                "categoriesfood_name" => $name,
+                "categoriesfood_name_ar" => $namear,
+                "categoriesfood_image" => $imagename
             );
 
-            $where =  "categories_id = $id ";
+            $where =  "categoriesfood_id = $id ";
 
             $count =  updateData($table, $data, $where);
 
@@ -50,9 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         } else {
 
 
-            $data = array("categories_name" => $name, "categories_name_ar" => $namear,  "categories_image" => $imageold);
+            $data = array("categoriesfood_name" => $name, "categoriesfood_name_ar" => $namear,  "categoriesfood_image" => $imageold);
 
-            $where =  "categories_id = $id ";
+            $where =  "categoriesfood_id = $id ";
 
             $count =  updateData($table, $data, $where);
         }
