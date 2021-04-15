@@ -172,8 +172,8 @@ function signInWithEmailAndPassword($table, $columnemail, $columnpassword, $emai
 function deleteFile($filedir, $imageold)
 {
 
-    if (file_exists("../upload/" . $filedir . "/" . $imageold)) {
-        unlink("../upload/" . $filedir . "/" . $imageold);
+    if (file_exists("../../upload/" . $filedir . "/" . $imageold)) {
+        unlink("../../upload/" . $filedir . "/" . $imageold);
     }
 }
 
