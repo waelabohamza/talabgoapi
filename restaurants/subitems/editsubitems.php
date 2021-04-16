@@ -15,8 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $subitemsdata   = getData($table, "subitemsfood_id", $id);
     $count          = $subitemsdata['count'];
 
-
     // $datauser  =  $user['data'];
+    
     if ($count > 0) {
 
         $data = array(
