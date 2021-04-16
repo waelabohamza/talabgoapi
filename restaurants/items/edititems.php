@@ -61,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 "itemsfood_name_ar"     =>  $namear,
                 "itemsfood_desc"        =>  $desc,
                 "itemsfood_desc_ar"     =>  $descar,
-                "itemsfood_image"       =>  $imagename,
                 "itemsfood_cat"         =>  $catid
             );
 
