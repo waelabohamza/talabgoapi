@@ -4,11 +4,11 @@ include "../../connect.php";
 
 $table = "itemsfoodview";
 
-$resid = $_GET['resid'];
+$resid = $_POST['resid'];
  
 $and   = filterResualt($_GET['catid'] ?? null, "itemsfood_cat");
 
-$limit = paginationLimit($_GET['page'] ?? null, 10000);
+$limit = paginationLimit($_POST['page'] ?? null, 10000);
 
 $data  = getAllData($table, "categoriesfood_restaurants = '$resid' $and $limit ");
 

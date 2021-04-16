@@ -4,7 +4,7 @@ include "../../connect.php";
 
 $table = "categoriesfood";
 
-$resid = $_GET['resid'] ; 
+$resid = $_POST['resid'] ; 
 
 $limit = paginationLimit($_GET['page'] ?? null, 10000);
 
