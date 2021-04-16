@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $id             = superFilter($_POST['id']);
     $name           = superFilter($_POST['name']);
     $namear         = superFilter($_POST['namear']);
-    $price          = superFilter($_POST['price']);
     $subitemsdata   = getData($table, "subitemsfood_id", $id);
     $count          = $subitemsdata['count'];
 
@@ -19,8 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $data = array(
             "subitemsfood_name" => $name,
-            "subitemsfood_name_ar" => $namear,
-            "subitemsfood_price" => $price
+            "subitemsfood_name_ar" => $namear 
         );
 
         $where =  "subitemsfood_id = $id ";
