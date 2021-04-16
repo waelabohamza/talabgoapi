@@ -2,9 +2,7 @@
 
 include "../../connect.php";
 
-
-$table = "	subitemsfood";
-
+$table = "subitemsfood";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
@@ -16,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $count          = $subitemsdata['count'];
 
     // $datauser  =  $user['data'];
-    
+
     if ($count > 0) {
 
         $data = array(
