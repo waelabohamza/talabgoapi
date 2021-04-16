@@ -14,7 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $namear         = superFilter($_POST['namear']);
     $desc           = superFilter($_POST['desc']);
     $descar         = superFilter($_POST['descar']);
-    $catid         = superFilter($_POST['catid']);
+    $catid          = superFilter($_POST['catid']);
+    $price          = superFilter($_POST['price']) ; 
+    $subitems  = superFilter($_POST['subitems']);
     $categoriedata  = getData($table, "itemsfood_id", $id);
     $count          = $categoriedata['count'];
     $imageold       = $categoriedata['values']['itemsfood_image'];
@@ -37,11 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     // Request 
 
             $data = array(
-                "itemsfood_name"        =>  $name,
-                "itemsfood_name_ar"     =>  $namear,
-                "itemsfood_desc"        =>  $desc,
-                "itemsfood_desc_ar"     =>  $descar,
-                "itemsfood_image"       =>  $imagename,
+                "itemsfood_name"        =>  $name       ,
+                "itemsfood_name_ar"     =>  $namear     ,
+                "itemsfood_desc"        =>  $desc       ,
+                "itemsfood_desc_ar"     =>  $descar     ,
+                "itemsfood_image"       =>  $imagename  ,
+                "itemsfood_price"       =>  $price      , 
+                "itemsfood_subitems"    =>  $subitems   ,
                 "itemsfood_cat"         =>  $catid
             );
 

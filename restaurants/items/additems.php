@@ -24,15 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $catid    = superFilter($_POST['catid']);
     $name    = superFilter($_POST['name']);
     $namear  = superFilter($_POST['namear']);
+    $price   = superFilter($_POST['price']) ; 
     $desc    = superFilter($_POST['desc']);
     $descar  = superFilter($_POST['descar']);
+    $subitems  = superFilter($_POST['subitems']);
 
     $data = array(
-        "itemsfood_name"        =>  $name,
-        "itemsfood_name_ar"     =>  $namear,
-        "itemsfood_desc"        =>  $desc,
-        "itemsfood_desc_ar"     =>  $descar,
-        "itemsfood_image"       =>  $imagename,
+        "itemsfood_name"        =>  $name       ,
+        "itemsfood_name_ar"     =>  $namear     ,
+        "itemsfood_desc"        =>  $desc       ,
+        "itemsfood_desc_ar"     =>  $descar     ,
+        "itemsfood_price"       =>  $price      , 
+        "itemsfood_image"       =>  $imagename  ,
+        "itemsfood_subitems"    =>  $subitems  ,
         "itemsfood_cat"         =>  $catid
     );
     if (empty($msgerrors)) {
