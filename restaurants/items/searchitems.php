@@ -1,8 +1,9 @@
 <?php
 include "../../connect.php";
 $table = "itemsfoodview";
-$search = superFilter($_POST['search']);
-$resid = $_POST['resid'];
+$data = json_decode(file_get_contents('php://input'), true);
+$search = superFilter($data['search']);
+$resid =  superFilter($data['datasearch']['resid']);
 if (isset($_POST['catid']) && $_POST['catid'] == "all") {
     $and = null;
 } else {
