@@ -2,15 +2,19 @@
 
 include "../../connect.php";
 
-$arraydatahome = array();
+$table = "restaurantsview";
 
-$data = getAllData("restaurantsview", " 1 =  1");
+$resid = $_POST['resid'];
 
-if ($data['count'] > 0) {
+$limit = paginationLimit($_GET['page'] ?? null, 9);
 
-    echo json_encode(array("status" => "success", "restaurants" => $data['values']));
-    
-} else {
-
-    echo json_encode(array("status" => "fail"));
+if (isset($_POST['type'])){
+    $type = $_POST['type']  ; 
+    $and = "restaurants_type = '$type'" ; 
+}else {
+    $and = null ; 
 }
+
+$data  = getAllData($table, "1 = 1  $and $limit ");
+
+createJson($data['count'], $data['values']);
