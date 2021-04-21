@@ -4,9 +4,9 @@ include "../../connect.php";
 
 $table = "categoriesfoodview";
 
-$limit = paginationLimit($_GET['page'] ?? null, $countrowinpage);
+$limit = paginationLimit($_GET['page'] ?? null, 100);
 
-$resid = 
+$resid = superFilter($_POST['resid']);
 
 $data  = getAllData($table, "categoriesfood_restaurants = '$resid'    $limit ");
 

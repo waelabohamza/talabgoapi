@@ -2,16 +2,16 @@
 
 include "../../connect.php";
 
-$table = "restaurantsview";
+$table = "itemsfoodview";
 
-$limit = paginationLimit($_GET['page'] ?? null, $countrowinpage);
+$limit = paginationLimit($_GET['page'] ?? null,1000);
 
-if (isset($_POST['type']) && $_POST['type'] == "all") {
+if (isset($_POST['categories']) && $_POST['categories'] == "all") {
     $and = null;
 } else {
-    $and   = filterResualt($_POST['type'] ?? null, "restaurants_type");
+    $and   = filterResualt($_POST['categories'] ?? null, "categoriesfood_id");
 }
 
-$data  = getAllData($table, "1 = 1  $and $limit ");
+$data  = getAllData($table, "categoriesfood_restaurants = $resid  $and $limit ");
 
 createJson($data['count'], $data['values']);
