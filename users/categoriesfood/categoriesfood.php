@@ -2,16 +2,12 @@
 
 include "../../connect.php";
 
-$table = "restaurantsview";
+$table = "categoriesfoodview";
 
 $limit = paginationLimit($_GET['page'] ?? null, $countrowinpage);
 
-if (isset($_POST['type']) && $_POST['type'] == "all") {
-    $and = null;
-} else {
-    $and   = filterResualt($_POST['type'] ?? null, "restaurants_type");
-}
+$resid = 
 
-$data  = getAllData($table, "1 = 1  $and $limit ");
+$data  = getAllData($table, "categoriesfood_restaurants = '$resid'    $limit ");
 
 createJson($data['count'], $data['values']);
