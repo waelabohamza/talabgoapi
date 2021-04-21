@@ -124,8 +124,6 @@ function paginationLimit($getpage, $countrow)
 function filterResualt($get , $column ){
 
     if (isset($get) && $get != null) {
-
-        $catid = $get;
     
         $and = "AND   $column  = '$get'  ";
         

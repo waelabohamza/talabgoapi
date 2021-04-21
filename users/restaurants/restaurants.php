@@ -6,13 +6,12 @@ $table = "restaurantsview";
 
 $resid = $_POST['resid'];
 
-$limit = paginationLimit($_GET['page'] ?? null, 9);
+$limit = paginationLimit($_GET['page'] ?? null, $countrowinpage);
 
-if (isset($_POST['type'])){
-    $type = $_POST['type']  ; 
-    $and = "restaurants_type = '$type'" ; 
-}else {
-    $and = null ; 
+if (isset($_POST['type']) && $_POST['type'] == "all") {
+    $and = null;
+} else {
+    $and   = filterResualt($_POST['catid'] ?? null, "restaurants_type");
 }
 
 $data  = getAllData($table, "1 = 1  $and $limit ");

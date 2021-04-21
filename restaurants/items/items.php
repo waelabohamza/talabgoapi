@@ -11,7 +11,7 @@ if (isset($_POST['catid']) && $_POST['catid'] == "all") {
     $and   = filterResualt($_POST['catid'] ?? null, "itemsfood_cat");
 }
 
-$limit = paginationLimit($_GET['page'] ?? null, 9);
+$limit = paginationLimit($_GET['page'] ?? null, $countrowinpage);
 
 $data  = getAllData($table, "categoriesfood_restaurants = '$resid' $and $limit ");
 
