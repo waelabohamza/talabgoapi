@@ -4,8 +4,6 @@ include "../../connect.php";
 
 $table = "restaurantsview";
 
-$resid = $_POST['resid'];
-
 $limit = paginationLimit($_GET['page'] ?? null, $countrowinpage);
 
 if (isset($_POST['type']) && $_POST['type'] == "all") {
