@@ -4,7 +4,7 @@ include "../../connect.php";
 
 $table = "subitemsfood";
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
     $id             = superFilter($_POST['id']);
     $name           = superFilter($_POST['name']);
