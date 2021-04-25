@@ -30,6 +30,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
         countresault($count);
     }
 } else {
-
     failCount();
 }
