@@ -27,8 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
         $count =  updateData($table, $data, $where);
 
-        countresault($count);
+        
     }
+    countresault($count);
 } else {
     failCount();
 }

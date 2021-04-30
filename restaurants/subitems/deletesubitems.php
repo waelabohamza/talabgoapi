@@ -4,7 +4,7 @@ include "../../connect.php";
 
 $filedir = "items";
 
-$table   = "itemsfood";
+$table   = "subitemsfood";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
     if ($checkcat > 0){
 
-        $count = deleteData($table, "itemsfood_id", $id);
+        $count = deleteData($table, "subitemsfood_id", $id);
 
         countresault($count);
 
