@@ -17,3 +17,9 @@ INNER JOIN itemsfood ON  itemsfood.itemsfood_id = subitemsfood.subitemsfood_item
 CREATE VIEW categoriesfoodview as 
 SELECT categoriesfood.* , restaurants.* FROM categoriesfood
 INNER JOIN restaurants ON restaurants.restaurants_id = categoriesfood.categoriesfood_restaurants ; 
+
+
+CREATE view deliverywaysview AS
+SELECT deliveryways.* , rdtw.*, restaurants.restaurants_name FROM rdtw 
+INNER JOIN  deliveryways ON deliveryways.deliveryways_id = rdtw.rdtw_deliveryways 
+INNER JOIN restaurants  ON restaurants.restaurants_id = rdtw.rdtw_res ; 
