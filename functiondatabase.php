@@ -475,20 +475,20 @@ function billRes($price, $userid, $type, $title, $body)
 
 // Money 
 
-function removeMoneyById($table, $column,  $price, $table_id, $id)
+function removeMoneyById($table, $columnprice,  $price, $column_id, $valueid)
 {
   global $con;
-  $stmt = $con->prepare("UPDATE $table SET $column = $column - $price WHERE $table_id = ?  ");
-  $stmt->execute(array($id));
+  $stmt = $con->prepare("UPDATE $table SET $columnprice = $columnprice - $price WHERE $column_id = ?  ");
+  $stmt->execute(array($valueid));
   $count = $stmt->rowCount();
   return $count;
 }
 
-function addMoneyById($table, $column,  $price, $table_id, $id)
+function addMoneyById($table, $columnprice,  $price, $column_id, $valueid)
 {
   global $con;
-  $stmt = $con->prepare("UPDATE $table SET $column = $column + $price WHERE $table_id = ?  ");
-  $stmt->execute(array($id));
+  $stmt = $con->prepare("UPDATE $table SET $columnprice = $columnprice + $price WHERE $column_id = ?  ");
+  $stmt->execute(array($valueid));
   $count = $stmt->rowCount();
   return $count;
 }
