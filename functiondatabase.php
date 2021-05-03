@@ -447,7 +447,51 @@ function insertmessagebadgesUsers($sid)
     }
 }
 
+//===========================================================
+// Bill invoice statement account 
+//===========================================================
 
+function bill($price, $userid, $type, $title, $body)
+{
+  global $con;
+  global $now;
+  $stmt = $con->prepare("INSERT INTO `bill`(`bill_price`, `bill_user`, `bill_type`, `bill_date`, `bill_title`, `bill_body` , `bill_cat`)
+                         VALUES (? , ? , ? , ? , ? , ? , 0 )");
+  $stmt->execute(array($price, $userid, $type,  $now, $title, $body));
+  $count = $stmt->rowCount();
+  return $count;
+}
+
+function billRes($price, $userid, $type, $title, $body)
+{
+  global $con;
+  global $now;
+  $stmt = $con->prepare("INSERT INTO `bill`(`bill_price`, `bill_user`, `bill_type`, `bill_date`, `bill_title`, `bill_body` , `bill_cat`)
+                         VALUES (? , ? , ? , ? , ? , ? , 1)");
+  $stmt->execute(array($price, $userid, $type,  $now, $title, $body));
+  $count = $stmt->rowCount();
+  return $count;
+}
+
+// Money 
+
+function removeMoneyById($table, $column,  $price, $table_id, $id)
+{
+  global $con;
+  $stmt = $con->prepare("UPDATE $table SET $column = $column - $price WHERE $table_id = ?  ");
+  $stmt->execute(array($id));
+  $count = $stmt->rowCount();
+  return $count;
+}
+
+function addMoneyById($table, $column,  $price, $table_id, $id)
+{
+  global $con;
+  $stmt = $con->prepare("UPDATE $table SET $column = $column + $price WHERE $table_id = ?  ");
+  $stmt->execute(array($id));
+  $count = $stmt->rowCount();
+  return $count;
+}
 
 
 
