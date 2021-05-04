@@ -69,16 +69,29 @@ if ($countStageOne > 0) {
         );
         $countStageTwoPartTwoPartThree = insertData("orderssubitemsfood", $data);
     }
-
     if ($countStageTwoPartTwo > 0 || $countStageTwoPartOne > 0) {
-        $countStageThree    = removeMoneyById("users", "users_balance", $totalprice, "users_id", $userid);
+            $countStageThree    = removeMoneyById("users", "users_balance", $totalprice, "users_id", $userid);
         if ($countStageThree > 0) {
             $countStagefour     = addMoneyById("restaurants", "restaurants_balance", $totalprice, "restaurants_id", $resid);
             if ($countStagefour > 0) {
-                successCount();
+
+                // For User
+                $title = "طلب طعام" ; 
+                $body  = "طلب طعام من المطعم" ; 
+                $countStageFivePartOne =    bill($totalprice, $userid, 0 , $title, $body, "users");
+               
+                // For Restaurants
+                $title = "طلب طعام" ; 
+                $body  = "طلب طعام من الزبون" ; 
+                $countStageFivePartTwo =    bill($totalprice, $resid, 1 , $title  , $body , "restaurants");
+                
+                if ($countStageFivePartOne > 0 && $countStageFivePartTwo > 0) {
+                    successCount();
+                }
+         
             } else {
                 addMoneyById("users", "users_balance", $totalprice, "users_id", $userid);
-                deleteData("ordersfood" ,"ordersfood_users" , $ordersid )  ;
+                deleteData("ordersfood", "ordersfood_users", $ordersid);
                 failCount();
             }
         }

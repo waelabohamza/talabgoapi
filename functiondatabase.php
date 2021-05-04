@@ -452,27 +452,18 @@ function insertmessagebadgesUsers($sid)
 // Bill invoice statement account 
 //===========================================================
 
-function bill($price, $userid, $type, $title, $body)
+function bill($price, $userid, $type, $title, $body , $cat)
 {
   global $con;
   global $now;
-  $stmt = $con->prepare("INSERT INTO `bill`(`bill_price`, `bill_user`, `bill_type`, `bill_date`, `bill_title`, `bill_body` , `bill_cat`)
-                         VALUES (? , ? , ? , ? , ? , ? , 0 )");
-  $stmt->execute(array($price, $userid, $type,  $now, $title, $body));
+  $stmt = $con->prepare("INSERT INTO `bill`(`bill_price`, `bill_sid`, `bill_type`, `bill_date`, `bill_title`, `bill_body` , `bill_cat`)
+                         VALUES (? , ? , ? , ? , ? , ? , ?)");
+  $stmt->execute(array($price, $userid, $type,  $now, $title, $body, $cat));
   $count = $stmt->rowCount();
   return $count;
 }
 
-function billRes($price, $userid, $type, $title, $body)
-{
-  global $con;
-  global $now;
-  $stmt = $con->prepare("INSERT INTO `bill`(`bill_price`, `bill_user`, `bill_type`, `bill_date`, `bill_title`, `bill_body` , `bill_cat`)
-                         VALUES (? , ? , ? , ? , ? , ? , 1)");
-  $stmt->execute(array($price, $userid, $type,  $now, $title, $body));
-  $count = $stmt->rowCount();
-  return $count;
-}
+ 
 
 // Money 
 
