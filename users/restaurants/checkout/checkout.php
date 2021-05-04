@@ -3,7 +3,7 @@
 include "../../../connect.php";
 
 $data = json_decode(file_get_contents('php://input'), true);
- 
+
 
 $lat           = superFilter($data['lat']);
 $long          = superFilter($data['long']);
@@ -13,7 +13,7 @@ $itemsRepeat   =  $data['itemsrepeate'];
 $typeDelivery  = superFilter($data['typedelivery']);
 $subitems      =  $data['subitems'];
 $notes         = superFilter($data['notes']);
-$price         = superFilter($data['totalprice']);
+$totalprice         = superFilter($data['totalprice']);
 $resid         = superFilter($data['resid']);
 
 $data = array(
@@ -22,7 +22,7 @@ $data = array(
     "ordersfood_notes"      => $notes,
     "ordersfood_lat"        => $lat,
     "ordersfood_long"       => $long,
-    "ordersfood_totalprice" => $price,
+    "ordersfood_totalprice" => $totalprice,
     "ordersfood_type"       => $typeDelivery
 );
 
@@ -69,15 +69,20 @@ if ($countStageOne > 0) {
         );
         $countStageTwoPartTwoPartThree = insertData("orderssubitemsfood", $data);
     }
-   
-    if ($countStageTwoPartTwo > 0 || $countStageTwoPartOne > 0 ) {
-             
-        
-            
-     }
 
-
-
+    if ($countStageTwoPartTwo > 0 || $countStageTwoPartOne > 0) {
+        $countStageThree    = removeMoneyById("users", "users_balance", $totalprice, "users_id", $userid);
+        if ($countStageThree > 0) {
+            $countStagefour     = addMoneyById("restaurants", "restaurants_balance", $totalprice, "restaurants_id", $resid);
+            if ($countStagefour > 0) {
+                successCount();
+            } else {
+                addMoneyById("users", "users_balance", $totalprice, "users_id", $userid);
+                deleteData("ordersfood" ,"ordersfood_users" , $ordersid )  ;
+                failCount();
+            }
+        }
+    }
 } else {
     echo json_encode(array("status" => "fail", "case" => "fail one Stage"));
 }
