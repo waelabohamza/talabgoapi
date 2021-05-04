@@ -75,7 +75,7 @@ if ($countStageOne > 0) {
         $countStageThree    = removeMoneyById("users", "users_balance", $totalprice, "users_id", $userid);
         if ($countStageThree > 0) {
             $countStagefour     = addMoneyById("restaurants", "restaurants_balance", $totalprice, "restaurants_id", $resid);
-            if ($countStagefour > 0) {
+            if ($countStagefour > 0){
 
                 // For User
                 $title = "طلب طعام";
@@ -92,6 +92,7 @@ if ($countStageOne > 0) {
                 } else {
                     successCount();
                 }
+                
 
             } else {
                 addMoneyById("users", "users_balance", $totalprice, "users_id", $userid);
