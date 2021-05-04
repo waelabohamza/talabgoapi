@@ -13,8 +13,10 @@ $itemsRepeat   =  $data['itemsrepeate'];
 $typeDelivery  = superFilter($data['typedelivery']);
 $subitems      =  $data['subitems'];
 $notes         = superFilter($data['notes']);
-$totalprice         = superFilter($data['totalprice']);
+$totalprice    = superFilter($data['totalprice']);
 $resid         = superFilter($data['resid']);
+$username      = superFilter($data['username']); 
+$resname       = superFilter($data['resname']); 
 
 $data = array(
     "ordersfood_users"      => $userid,
@@ -69,32 +71,36 @@ if ($countStageOne > 0) {
         );
         $countStageTwoPartTwoPartThree = insertData("orderssubitemsfood", $data);
     }
-    if ($countStageTwoPartTwo > 0 || $countStageTwoPartOne > 0) {
-            $countStageThree    = removeMoneyById("users", "users_balance", $totalprice, "users_id", $userid);
+    if (isset($countStageTwoPartTwo) || isset($countStageTwoPartOne)){
+        $countStageThree    = removeMoneyById("users", "users_balance", $totalprice, "users_id", $userid);
         if ($countStageThree > 0) {
             $countStagefour     = addMoneyById("restaurants", "restaurants_balance", $totalprice, "restaurants_id", $resid);
             if ($countStagefour > 0) {
 
                 // For User
-                $title = "طلب طعام" ; 
-                $body  = "طلب طعام من المطعم" ; 
-                $countStageFivePartOne =    bill($totalprice, $userid, 0 , $title, $body, "users");
-               
+                $title = "طلب طعام";
+                $body  = " طلب طعام من المطعم " . $resname ;
+                $countStageFivePartOne =    bill($totalprice, $userid, 0, $title, $body, "users");
+
                 // For Restaurants
-                $title = "طلب طعام" ; 
-                $body  = "طلب طعام من الزبون" ; 
-                $countStageFivePartTwo =    bill($totalprice, $resid, 1 , $title  , $body , "restaurants");
-                
+                $title = "طلب طعام";
+                $body  = " طلب طعام من الزبون " . $username ;
+                $countStageFivePartTwo =    bill($totalprice, $resid, 1, $title, $body, "restaurants");
+
                 if ($countStageFivePartOne > 0 && $countStageFivePartTwo > 0) {
                     successCount();
+                } else {
+                    successCount();
                 }
-         
+
             } else {
                 addMoneyById("users", "users_balance", $totalprice, "users_id", $userid);
                 deleteData("ordersfood", "ordersfood_users", $ordersid);
                 failCount();
             }
         }
+    }else {
+        failCount() ; 
     }
 } else {
     echo json_encode(array("status" => "fail", "case" => "fail one Stage"));
