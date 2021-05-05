@@ -3,7 +3,8 @@
 include "../connect.php";
 $i = 0;
 $searcharray = array();
-$search = $_POST['search'];
+$data = json_decode(file_get_contents('php://input'), true);
+$search = $data['search'];
 $stmtres = $con->prepare("SELECT * FROM restaurants WHERE restaurants_name LIKE '%$search%' LIMIT 10 ");
 $stmtres->execute();
 $countres = $stmtres->rowCount();
@@ -19,7 +20,7 @@ while ($res = $stmtres->fetch(PDO::FETCH_ASSOC)) {
     $searcharray[$i]['type_name']   = $res['restaurants_name'];
     $searcharray[$i]['type_id']     = $res['restaurants_id'];
     $searcharray[$i]['type']        = "restaurants";
-    $searcharray[$i]['data']        = $datares;
+    $searcharray[$i]['data']        = $res;
 
 
     $i++;
@@ -45,10 +46,10 @@ while ($items = $stmtitem->fetch(PDO::FETCH_ASSOC)) {
     $i++;
 }
 
-if (  $countres > 0 || $countitem > 0) {
+if ($countres > 0 || $countitem > 0) {
     echo json_encode($searcharray);
 } else {
-    echo json_encode(array(0 => "faild"));
+    echo json_encode(array(0 => "fail"));
 }
 
 
