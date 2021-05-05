@@ -88,6 +88,13 @@ if ($countStageOne > 0) {
                 $countStageFivePartTwo =    bill($totalprice, $resid, 1, $title, $body, "restaurants");
 
                 if ($countStageFivePartOne > 0 && $countStageFivePartTwo > 0) {
+                    // s1 = stage One مرحلة اولى من الطلبية
+                    $title = "هام"  ; 
+                    $body  =  "تم الطلب بنجاح الرجاء انتظار موافقة المطعم";
+                    sendNotifySpecificUser($userid , $title  , $body , "" , "usersordersfoods1"); 
+                    $title = "هام"  ; 
+                    $body  =  "يوجد طلب بانتظار الموافقة";
+                    sendNotifySpecificRes($resid , $title , $body , ""    , "resordersfoods1"); 
                     successCount();
                 } else {
                     successCount();
