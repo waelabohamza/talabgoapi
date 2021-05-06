@@ -485,6 +485,21 @@ function addMoneyById($table, $columnprice,  $price, $column_id, $valueid)
   return $count;
 }
 
+function getInfoUserByPhone($phone)
+{
+
+  global $con;
+
+  $stmt = $con->prepare("SELECT  users.users_id , users.users_name    FROM  `users`  WHERE users_phone = ? ");
+
+  $stmt->execute(array($phone));
+
+  $values  = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  return $values;
+}
+
+
 
 
 
