@@ -2,7 +2,7 @@
 
 include "../../connect.php";
 
-$userid = $_POST['userid'];
+$userid = superFilter($_POST['userid']);
 
 $datebetween = intval($_POST['datebetween'] ?? null);
 
