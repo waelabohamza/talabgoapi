@@ -110,6 +110,21 @@ function getData($table, $where, $value, $and = NULL)
     return $data;
 }
 
+function getDataColumn($table, $columnname , $where, $value, $and = NULL)
+{
+
+    global $con;
+ 
+    $stmt = $con->prepare("SELECT $columnname FROM $table WHERE $where = ? $and  ");
+
+    $stmt->execute(array($value));
+
+    $data = $stmt->fetchColumn();
+
+    return $data;
+}
+
+
 function paginationLimit($getpage, $countrow)
 {
     //  CountRow :  Number Items view In Evey Page

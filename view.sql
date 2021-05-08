@@ -5,7 +5,7 @@ INNER JOIN typeres ON restaurants.restaurants_type = typeres.typeres_id  ;
 CREATE VIEW itemsfoodview AS 
 SELECT itemsfood.* , categoriesfood.* , restaurants.* FROM itemsfood 
 INNER JOIN categoriesfood ON categoriesfood.categoriesfood_id = itemsfood.itemsfood_cat
-INNER JOIN restaurants ON restaurants.restaurants_id = categoriesfood.categoriesfood_restaurants 
+INNER JOIN restaurants ON restaurants.restaurants_id = categoriesfood.categoriesfood_restaurants ;  
 
  
 

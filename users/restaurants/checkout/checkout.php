@@ -1,5 +1,4 @@
 <?php
-
 include "../../../connect.php";
 
 $data = json_decode(file_get_contents('php://input'), true);
@@ -15,8 +14,17 @@ $subitems      =  $data['subitems'];
 $notes         = superFilter($data['notes']);
 $totalprice    = superFilter($data['totalprice']);
 $resid         = superFilter($data['resid']);
-$username      = superFilter($data['username']); 
-$resname       = superFilter($data['resname']); 
+$username      = superFilter($data['username']);
+$resname       = superFilter($data['resname']);
+
+
+$usersprice = getDataColumn("users", "users_balance", "users_id", $userid);
+
+if ($usersprice < $totalprice) {
+    echo json_encode(array("status" => "moneynotenough"));
+    exit();
+}
+
 
 $data = array(
     "ordersfood_users"      => $userid,
@@ -71,44 +79,42 @@ if ($countStageOne > 0) {
         );
         $countStageTwoPartTwoPartThree = insertData("orderssubitemsfood", $data);
     }
-    if (isset($countStageTwoPartTwo) || isset($countStageTwoPartOne)){
+    if (isset($countStageTwoPartTwo) || isset($countStageTwoPartOne)) {
         $countStageThree    = removeMoneyById("users", "users_balance", $totalprice, "users_id", $userid);
         if ($countStageThree > 0) {
             $countStagefour     = addMoneyById("restaurants", "restaurants_balance", $totalprice, "restaurants_id", $resid);
-            if ($countStagefour > 0){
+            if ($countStagefour > 0) {
 
                 // For User
                 $title = "طلب طعام";
-                $body  = " طلب طعام من المطعم " . $resname ;
+                $body  = " طلب طعام من المطعم " . $resname;
                 $countStageFivePartOne =    bill($totalprice, $userid, 0, $title, $body, "users");
 
                 // For Restaurants
                 $title = "طلب طعام";
-                $body  = " طلب طعام من الزبون " . $username ;
+                $body  = " طلب طعام من الزبون " . $username;
                 $countStageFivePartTwo =    bill($totalprice, $resid, 1, $title, $body, "restaurants");
 
                 if ($countStageFivePartOne > 0 && $countStageFivePartTwo > 0) {
                     // s1 = stage One مرحلة اولى من الطلبية
-                    $title = "هام"  ; 
+                    $title = "هام";
                     $body  =  "تم الطلب بنجاح الرجاء انتظار موافقة المطعم";
-                    sendNotifySpecificUser($userid , $title  , $body , "" , "usersordersfoods1"); 
-                    $title = "هام"  ; 
+                    sendNotifySpecificUser($userid, $title, $body, "", "usersordersfoods1");
+                    $title = "هام";
                     $body  =  "يوجد طلب بانتظار الموافقة";
-                    sendNotifySpecificRes($resid , $title , $body , ""    , "resordersfoods1"); 
+                    sendNotifySpecificRes($resid, $title, $body, "", "resordersfoods1");
                     successCount();
                 } else {
                     successCount();
                 }
-                
-
             } else {
                 addMoneyById("users", "users_balance", $totalprice, "users_id", $userid);
                 deleteData("ordersfood", "ordersfood_users", $ordersid);
                 failCount();
             }
         }
-    }else {
-        failCount() ; 
+    } else {
+        failCount();
     }
 } else {
     echo json_encode(array("status" => "fail", "case" => "fail one Stage"));
