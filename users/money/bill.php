@@ -18,7 +18,9 @@ if (isset($_POST['datebetween']) && $datebetween != null) {
 
 
 
-$stmt = $con->prepare("SELECT * FROM `bill` WHERE bill_sid  =  ? And  bill_cat = 'users' $and  ORDER BY bill_id DESC ");
+$stmt = $con->prepare("SELECT  bill.*  , users.users_balance FROM `bill`
+INNER JOIN  users ON users.users_id = bill.bill_sid 
+ WHERE bill_sid  =  ? And  bill_cat = 'users' $and  ORDER BY bill_id DESC ");
 
 $stmt->execute(array($userid));
 
@@ -27,7 +29,7 @@ $bill = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $count = $stmt->rowCount();
 
 if ($count > 0) {
-    echo json_encode(array("status" => "success" , "bill" => $bill));
+    echo json_encode(array("status" => "success", "bill" => $bill));
 } else {
     zeroCount();
 }
