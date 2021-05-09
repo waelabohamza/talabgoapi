@@ -7,7 +7,6 @@ $data = getData("users", "users_email",  $email);
 
 $count = $data['count'];
 
-$password = $data['values']['users_password'] ; 
 
 $code = rand(10000 , 99999)  ; 
 
@@ -23,7 +22,7 @@ if ($count > 0 ) {
 
     updateData("users" , $datapass , "users_email  = '$email' ");
 
-    echo json_encode(array("status"=> "success" , "code" => $code  )) ;
+    echo json_encode(array("status" => "success" , "code" => $code  )) ;
 
 }else {
 

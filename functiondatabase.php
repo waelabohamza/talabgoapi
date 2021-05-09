@@ -6,7 +6,8 @@
 //  CopyRight By Wael Abu Hamza
 //=====================================================================
 
-// date_default_timezone_set('Asia/Kuwait');
+// date_default_timezone_set('Asia/Beirut');
+date_default_timezone_set('Asia/Kuwait');
 
 define('KB', 1024);
 define('MB', 1048576);

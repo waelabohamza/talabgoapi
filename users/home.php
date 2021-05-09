@@ -27,6 +27,11 @@ if ($data['count'] > 0) {
     $arraydatahome['res'] = "0" ;
 
 }
+$userid = superFilter($_POST['usersid']);
+$data = getDataColumn("users","users_balance" , "users_id" , $userid);
+$arraydatahome['money'] = $data;
+
+ 
 
 
 echo json_encode($arraydatahome); 
