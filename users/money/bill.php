@@ -18,8 +18,8 @@ if (isset($_POST['datebetween']) && $datebetween != null) {
 
 
 
-$stmt = $con->prepare("SELECT  bill.*  , users.users_balance FROM `bill`
-INNER JOIN  users ON users.users_id = bill.bill_sid 
+$stmt = $con->prepare("SELECT  bill.*   FROM `bill`
+ 
  WHERE bill_sid  =  ? And  bill_cat = 'users' $and  ORDER BY bill_id DESC ");
 
 $stmt->execute(array($userid));

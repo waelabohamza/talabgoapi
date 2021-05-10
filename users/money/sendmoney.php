@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         "sender"  => $username,
                         "price"   => $price
                     ));
-                    $title = "TalabGoFoodDelivery";
+                    $title = "تحويل رصيد";
                     $message = " تم تحويل رصيد "  . $price . " دينار من قبل  "   . $username  .  " اليك ";
                     bill($price, $useridrecive, 1, "تحويل مالي", $message, "users");
                     sendNotifySpecificUser($useridrecive, $title, $message, "", "home");
