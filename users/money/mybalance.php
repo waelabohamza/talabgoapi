@@ -2,7 +2,7 @@
 
 include "../../connect.php"  ;  
 
-$userid = superFilter($_POST['usersid']);
+$userid = superFilter($_POST['userid']);
 
 $data = getDataColumn("users","users_balance" , "users_id" , $userid);
 
