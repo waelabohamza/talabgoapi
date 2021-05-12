@@ -2,14 +2,10 @@
 
 include "../../../connect.php";
 
-$table = "ordersfood";
+$table = "ordersfoodview";
 
-$limit = paginationLimit($_GET['page'] ?? null, 1000);
+$userid  = superFilter($_POST['userid']);
 
-$resid  = superFilter($_POST['resid']);
-
-
-
-$data  = getAllData($table, "categoriesfood_restaurants = '$resid'  $and $limit ");
+$data  = getAllData($table, "ordersfood_users = '$userid' ");
 
 createJson($data['count'], $data['values']);

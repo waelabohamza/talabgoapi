@@ -80,10 +80,10 @@ function updateData($table, $data, $where)
     return $count;
 }
 
-function deleteData($table, $col, $value)
+function deleteData($table, $col, $value , $and = null)
 {
     global $con;
-    $stmt = $con->prepare("DELETE FROM $table WHERE $col  = ? ");
+    $stmt = $con->prepare("DELETE FROM $table WHERE $col  = ?  $and ");
     $stmt->execute(array($value));
     $count = $stmt->rowCount();
     return $count;
