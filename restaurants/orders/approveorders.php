@@ -2,10 +2,12 @@
 
 include "../../connect.php";    
 $table = "ordersfood";
+
 // Request
 $ordersid = superFilter($_POST['ordersid']);
 $userid  = superFilter($_POST['userid']);
 $resid  = superFilter($_POST['resid']);
+
 // ================
 $data = array("ordersfood_status" => 1);
 
