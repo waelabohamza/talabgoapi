@@ -1,9 +1,7 @@
 <?php
 
-include "../../connect.php";
-
+include "../../connect.php";    
 $table = "ordersfood";
-
 // Request
 $ordersid = superFilter($_POST['ordersid']);
 $userid  = superFilter($_POST['userid']);
@@ -15,11 +13,11 @@ $count = updateData($table, $data, "ordersfood_id = '$ordersid' ");
 
 if ($count > 0) {
     $title = "هام";
-    $body  =  "تم الطلب بنجاح الرجاء انتظار موافقة المطعم";
-    sendNotifySpecificUser($userid, $title, $body, "", "usersordersfoods1");
+    $body  =  "تم الموافقة عل طلبك بنجاح ";
+    sendNotifySpecificUser($userid, $title, $body, "", "usersordersfood2");
     $title = "هام";
-    $body  =  "يوجد طلب بانتظار الموافقة";
-    sendNotifySpecificRes($resid, $title, $body, "", "resordersfoods1");
+    $body  =  "تم الموافقة على طلب  الزبون";
+    sendNotifySpecificRes($resid, $title, $body, "", "resordersfood2");
 }
 
 countresault($count);
