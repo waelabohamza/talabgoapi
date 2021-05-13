@@ -1,6 +1,7 @@
 <?php
 
-include "../../connect.php";    
+include "../../connect.php";  
+  
 $table = "ordersfood";
 
 // Request
