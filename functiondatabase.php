@@ -323,7 +323,7 @@ function deleteToken($sid, $token, $type)
 //  SEND NOTEFICATION API
 //=====================================================================================
 
-function sendGCM($title, $message, $fcm_id, $p_id, $p_name)
+function sendGCM($title, $message, $fcm_id, $pageid, $pagename)
 {
     //$message = utf8_decode($message);
 
@@ -344,8 +344,8 @@ function sendGCM($title, $message, $fcm_id, $p_id, $p_name)
 
         ),
         'data' => array(
-            "page_id" => $p_id,
-            "page_name" => $p_name
+            "pageid" => $pageid,
+            "pagename" => $pagename
             //			'message' => 'Hello World!'
         )
 

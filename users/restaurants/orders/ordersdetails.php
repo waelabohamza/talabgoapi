@@ -2,7 +2,7 @@
 
 include "../../../connect.php";
 
-$table = "ordersfooddetailsview";
+$table = "ordersdetailsview";
 
 $ordersid  = superFilter($_POST['ordersid']);
 
