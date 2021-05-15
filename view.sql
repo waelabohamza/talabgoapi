@@ -43,3 +43,18 @@ INNER JOIN itemsfood ON itemsfood.itemsfood_id = ordersfooddetails.ordersfooddet
 CREATE VIEW orderssubitemsfoofview AS
 SELECT ordersfooddetails.* , orderssubitemsfood.* FROM ordersfooddetails 
 INNER JOIN orderssubitemsfood ON ordersfooddetails.ordersfooddetails_parentid = orderssubitemsfood.orderssubitemsfood_itemsid ; 
+
+
+-- Report Restaurants 
+CREATE VIEW reportresview AS
+SELECT DISTINCT(ordersfooddetails.ordersfooddetails_itemsid)
+, SUM(ordersfooddetails_quantity) as countitems  
+, COUNT(ordersfooddetails_itemsid) as countwithoutquantity
+, itemsfood.itemsfood_name
+, itemsfood.itemsfood_price * SUM(ordersfooddetails_quantity) as totalprice  
+, ordersfood.ordersfood_date   , 
+ordersfood.ordersfood_res
+FROM ordersfooddetails  
+INNER JOIN itemsfood ON itemsfood.itemsfood_id = ordersfooddetails.ordersfooddetails_itemsid
+INNER JOIN ordersfood ON ordersfood.ordersfood_id = ordersfooddetails.ordersfooddetails_ordersid
+GROUP BY ordersfooddetails.ordersfooddetails_itemsid ; 
