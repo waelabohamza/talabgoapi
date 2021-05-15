@@ -26,7 +26,7 @@ if ($count > 0) {
         $body  = " الغاء طلب طعام من المطعم " . $resname;
         $countStageFivePartOne =    bill($price, $userid, 1, $title, $body, "users");
         $body  = " الغاء طلب طعام من الزبون " . $username;
-        $countStageFivePartTwo =    bill($price, $resid, 1, $title, $body, "restaurants");
+        $countStageFivePartTwo =    bill($price, $resid, 0, $title, $body, "restaurants");
     }
     successCount();
 } else {
