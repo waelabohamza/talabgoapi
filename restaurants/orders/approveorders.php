@@ -16,7 +16,7 @@ $count = updateData($table, $data, "ordersfood_id = '$ordersid' ");
 
 if ($count > 0){
     $title = "هام";
-    $body  =  "تم الموافقة عل طلبك بنجاح ";
+    $body  =  "تم الموافقة عل طلبك بنجاح "; 
     sendNotifySpecificUser($userid, $title, $body, "", "ordersfoodscreenptwo");
     $title = "هام";
     $body  =  "تم الموافقة على طلب  الزبون";

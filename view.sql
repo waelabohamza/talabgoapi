@@ -34,5 +34,12 @@ INNER JOIN restaurants ON restaurants.restaurants_id = ordersfood.ordersfood_res
 
 
 CREATE VIEW ordersdetailsview AS 
-SELECT ordersfooddetails.* , ordersfood.*  FROM ordersfooddetails 
-INNER JOIN ordersfood ON ordersfood.ordersfood_id = ordersfooddetails.ordersfooddetails_ordersid ; 
+SELECT ordersfooddetails.* , ordersfood.*  , itemsfood.* FROM ordersfooddetails 
+INNER JOIN ordersfood ON ordersfood.ordersfood_id = ordersfooddetails.ordersfooddetails_ordersid 
+INNER JOIN itemsfood ON itemsfood.itemsfood_id = ordersfooddetails.ordersfooddetails_itemsid   ; 
+
+
+
+CREATE VIEW orderssubitemsfoofview AS
+SELECT ordersfooddetails.* , orderssubitemsfood.* FROM ordersfooddetails 
+INNER JOIN orderssubitemsfood ON ordersfooddetails.ordersfooddetails_parentid = orderssubitemsfood.orderssubitemsfood_itemsid ; 
