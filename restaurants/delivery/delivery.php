@@ -2,7 +2,7 @@
 
 include "../../connect.php";
 
-$table = "delivery";
+$table = "deliveryfoodview";
 
 $resid = superFilter($_POST['resid']);
 

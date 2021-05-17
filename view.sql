@@ -58,3 +58,10 @@ FROM ordersfooddetails
 INNER JOIN itemsfood ON itemsfood.itemsfood_id = ordersfooddetails.ordersfooddetails_itemsid
 INNER JOIN ordersfood ON ordersfood.ordersfood_id = ordersfooddetails.ordersfooddetails_ordersid
 GROUP BY ordersfooddetails.ordersfooddetails_itemsid ; 
+
+
+
+
+CREATE VIEW deliveryview AS 
+SELECT delivery.* , restaurants.* FROM delivery 
+INNER JOIN restaurants ON restaurants.restaurants_id = delivery.delivery_res
