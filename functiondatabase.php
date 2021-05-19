@@ -80,7 +80,7 @@ function updateData($table, $data, $where)
     return $count;
 }
 
-function deleteData($table, $col, $value , $and = null)
+function deleteData($table, $col, $value, $and = null)
 {
     global $con;
     $stmt = $con->prepare("DELETE FROM $table WHERE $col  = ?  $and ");
@@ -111,11 +111,11 @@ function getData($table, $where, $value, $and = NULL)
     return $data;
 }
 
-function getDataColumn($table, $columnname , $where, $value, $and = NULL)
+function getDataColumn($table, $columnname, $where, $value, $and = NULL)
 {
 
     global $con;
- 
+
     $stmt = $con->prepare("SELECT $columnname FROM $table WHERE $where = ? $and  ");
 
     $stmt->execute(array($value));
@@ -138,19 +138,18 @@ function paginationLimit($getpage, $countrow)
     return $limit;
 }
 
-function filterResualt($get , $column ){
+function filterResualt($get, $column)
+{
 
     if (isset($get) && $get != null) {
-    
-        $and = "AND   $column  = '$get'  ";
-        
-    } else {
-    
-        $and = null;
 
+        $and = "AND   $column  = '$get'  ";
+    } else {
+
+        $and = null;
     }
 
-    return $and  ;     
+    return $and;
 }
 
 function createJson($count, $values)
@@ -185,7 +184,7 @@ function maxId($column, $table)
 
 //===========================
 
-function signInWithEmailAndPassword($table, $columnemail, $columnpassword, $email, $password, $and)
+function signInWithEmailAndPassword($table, $columnemail, $columnpassword, $email, $password, $and = null)
 {
     global $con;
     $stmt = $con->prepare("SELECT * FROM $table WHERE $columnemail = ? AND $columnpassword = ? $and ");
@@ -389,19 +388,22 @@ function sendNotifySpecificUser($userid, $title, $message, $p_id, $p_name)
 
 
 
-// function sendNotifySpecificTaxi($taxiid, $title, $message, $p_id, $p_name)
-// {
-//     global $con;
-//     $stmt = $con->prepare("SELECT taxi.taxi_id , tokentaxi.* FROM taxi
-//                          INNER JOIN tokentaxi ON tokentaxi.tokentaxi_taxi = taxi.taxi_id
-//                          WHERE  taxi.taxi_id = ?");
-//     $stmt->execute(array($taxiid));
-//     $taxis = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//     foreach ($taxis as $taxi) {
-//         sendGCM($title, $message, $taxi['tokentaxi_token'], $p_id, $p_name);
-//     }
-//     insertNotifySpecifcCatInDatabase($title, $message, 0, $taxiid);
-// }
+function sendNotifySpecificDelviery($deliveryid, $title, $message, $p_id, $p_name)
+{
+    global $con;
+    $stmt = $con->prepare("SELECT delivery.delivery_id , tokens.* FROM  delivery
+    INNER JOIN tokens ON tokens.tokens_sid = delivery.delivery_id
+    WHERE delivery.delivery_id = ? AND tokens_type = 'delivery'
+    ");
+
+    $stmt->execute(array($deliveryid));
+
+    $deliverys = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($deliverys as $delivery) {
+        sendGCM($title, $message, $delivery['tokens_token'], $p_id, $p_name);
+    }
+    insertNotifySpecifcCatInDatabase($title, $message, "delivery", $deliveryid);
+}
 
 
 
@@ -468,51 +470,51 @@ function insertmessagebadgesUsers($sid)
 // Bill invoice statement account 
 //===========================================================
 
-function bill($price, $userid, $type, $title, $body , $cat)
+function bill($price, $userid, $type, $title, $body, $cat)
 {
-  global $con;
-  global $now;
-  $stmt = $con->prepare("INSERT INTO `bill`(`bill_price`, `bill_sid`, `bill_type`, `bill_date`, `bill_title`, `bill_body` , `bill_cat`)
+    global $con;
+    global $now;
+    $stmt = $con->prepare("INSERT INTO `bill`(`bill_price`, `bill_sid`, `bill_type`, `bill_date`, `bill_title`, `bill_body` , `bill_cat`)
                          VALUES (? , ? , ? , ? , ? , ? , ?)");
-  $stmt->execute(array($price, $userid, $type,  $now, $title, $body, $cat));
-  $count = $stmt->rowCount();
-  return $count;
+    $stmt->execute(array($price, $userid, $type,  $now, $title, $body, $cat));
+    $count = $stmt->rowCount();
+    return $count;
 }
 
- 
+
 
 // Money 
 
 function removeMoneyById($table, $columnprice,  $price, $column_id, $valueid)
 {
-  global $con;
-  $stmt = $con->prepare("UPDATE $table SET $columnprice = $columnprice - $price WHERE $column_id = ?  ");
-  $stmt->execute(array($valueid));
-  $count = $stmt->rowCount();
-  return $count;
+    global $con;
+    $stmt = $con->prepare("UPDATE $table SET $columnprice = $columnprice - $price WHERE $column_id = ?  ");
+    $stmt->execute(array($valueid));
+    $count = $stmt->rowCount();
+    return $count;
 }
 
 function addMoneyById($table, $columnprice,  $price, $column_id, $valueid)
 {
-  global $con;
-  $stmt = $con->prepare("UPDATE $table SET $columnprice = $columnprice + $price WHERE $column_id = ?  ");
-  $stmt->execute(array($valueid));
-  $count = $stmt->rowCount();
-  return $count;
+    global $con;
+    $stmt = $con->prepare("UPDATE $table SET $columnprice = $columnprice + $price WHERE $column_id = ?  ");
+    $stmt->execute(array($valueid));
+    $count = $stmt->rowCount();
+    return $count;
 }
 
 function getInfoUserByPhone($phone)
 {
 
-  global $con;
+    global $con;
 
-  $stmt = $con->prepare("SELECT  users.users_id , users.users_name    FROM  `users`  WHERE users_phone = ? ");
+    $stmt = $con->prepare("SELECT  users.users_id , users.users_name    FROM  `users`  WHERE users_phone = ? ");
 
-  $stmt->execute(array($phone));
+    $stmt->execute(array($phone));
 
-  $values  = $stmt->fetch(PDO::FETCH_ASSOC);
+    $values  = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  return $values;
+    return $values;
 }
 
 
