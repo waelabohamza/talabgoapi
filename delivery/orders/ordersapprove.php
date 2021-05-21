@@ -8,6 +8,8 @@ $ordersid = superFilter($_POST['ordersid']);
 
 $deliveryid = superFilter($_POST['deliveryid']);
 
+$userid =  superFilter($_POST['userid']) ; 
+
 
 $data = array(
     "ordersfood_status" => "2",
