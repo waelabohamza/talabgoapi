@@ -27,10 +27,11 @@ INNER JOIN restaurants  ON restaurants.restaurants_id = rdtw.rdtw_res ;
 
 
 CREATE VIEW ordersfoodview AS 
-SELECT ordersfood.* , users.*  , restaurants.* FROM ordersfood 
+SELECT ordersfood.* , users.*  , restaurants.* , deliveryways.* FROM ordersfood 
 INNER JOIN users ON users.users_id = ordersfood.ordersfood_users    
-INNER JOIN restaurants ON restaurants.restaurants_id = ordersfood.ordersfood_res ; 
-
+INNER JOIN restaurants ON restaurants.restaurants_id = ordersfood.ordersfood_res 
+INNER JOIN deliveryways ON  deliveryways.deliveryways_type = ordersfood.ordersfood_type  ; 
+ 
 
 
 CREATE VIEW ordersdetailsview AS 
