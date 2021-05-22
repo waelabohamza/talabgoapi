@@ -12,13 +12,12 @@ $typeorders = superFilter($_POST['orderstype']);
 
 // ================
 
-if () {
-
-}else {
-
+if ($typeorders == "table") {
+    $data = array("ordersfood_status" => 2);
+} else {
+    $data = array("ordersfood_status" => 3);
 }
 
-$data = array("ordersfood_status" => 2);
 
 $count = updateData($table, $data, "ordersfood_id = '$ordersid' ");
 
