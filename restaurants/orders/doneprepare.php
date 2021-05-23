@@ -12,7 +12,7 @@ $typeorders = superFilter($_POST['orderstype']);
 
 // ================
 
-if ($typeorders == "table") {
+if ($typeorders == "tableqrcode") {
     $data = array("ordersfood_status" => 2);
 } else {
     $data = array("ordersfood_status" => 3);

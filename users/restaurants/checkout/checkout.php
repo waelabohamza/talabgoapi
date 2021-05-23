@@ -17,6 +17,12 @@ $resid         = superFilter($data['resid']);
 $username      = superFilter($data['username']);
 $resname       = superFilter($data['resname']);
 
+if ($typeDelivery == "tableqrcode") {
+    $orderstable       =  superFilter($data['orderstable']);
+} else {
+    $orderstable       =  "0";
+}
+
 
 $usersprice = getDataColumn("users", "users_balance", "users_id", $userid);
 
@@ -33,7 +39,9 @@ $data = array(
     "ordersfood_lat"        => $lat,
     "ordersfood_long"       => $long,
     "ordersfood_totalprice" => $totalprice,
-    "ordersfood_type"       => $typeDelivery
+    "ordersfood_type"       => $typeDelivery , 
+    "ordersfood_table"       => $orderstable 
+
 );
 
 $countStageOne = insertData("ordersfood", $data);
