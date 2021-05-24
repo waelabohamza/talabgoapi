@@ -47,6 +47,14 @@ if (isset($_POST['password'])) {
     $count = updateData("restaurants", $data, "restaurants_id = '$resid' ");
     countresault($count);
 }
+if (isset($_POST['minpriceorders'])) {
+    $minpriceorders =  superFilter($_POST['minpriceorders']);
+    $data = array(
+        "restaurants_minpriceorders" =>  $minpriceorders,
+    );
+    $count = updateData("restaurants", $data, "restaurants_id = '$resid' ");
+    countresault($count);
+}
 if (isset($_POST['username'])) {
     $username =  superFilter($_POST['username']);
     $data = array(
