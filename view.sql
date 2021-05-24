@@ -63,6 +63,6 @@ GROUP BY ordersfooddetails.ordersfooddetails_itemsid ;
 
 
 
-CREATE VIEW deliveryview AS 
+CREATE VIEW deliveryfoodview AS 
 SELECT delivery.* , restaurants.* FROM delivery 
 INNER JOIN restaurants ON restaurants.restaurants_id = delivery.delivery_res
