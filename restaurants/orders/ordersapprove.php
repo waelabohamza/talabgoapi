@@ -19,8 +19,8 @@ if ($count > 0){
     $body  =  "تم الموافقة عل طلبك بنجاح "; 
     sendNotifySpecificUser($userid, $title, $body, "", "ordersfoodscreenptwo");
     $title = "هام";
-    $body  =  "تم الموافقة على طلب  الزبون";
-    sendNotifySpecificRes($resid, $title, $body, "", "Rordersfoodscreentwo");
+    $body  =  "تم الموافقة على طلب  بنجاح والان الطلب بانتظار موافقة عامل التوصيل";
+    sendNotifySpecificRes($resid, $title, $body, "", "");
 }
 
 countresault($count);
