@@ -17,10 +17,10 @@ $count = updateData($table, $data, "ordersfood_id = '$ordersid' ");
 if ($count > 0) {
     $title = "هام";
     $body  =  "شكرا لزيارتك مطعمنا نتمنى ان تكون الوجبة نالت على اعجابكم ";
-    sendNotifySpecificUser($userid, $title, $body, "", "ordersfoodscreenptwo");
+    sendNotifySpecificUser($userid, $title, $body, "", "homeuser");
     $title = "هام";
     $body  =  "تم ااغلاف  الطاولة  بنجاح";
-    sendNotifySpecificRes($resid, $title, $body, "", "Rordersfoodscreentwo");
+    sendNotifySpecificRes($resid, $title, $body, "", "Rhome");
 }
 
 countresault($count);

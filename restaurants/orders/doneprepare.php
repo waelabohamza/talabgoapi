@@ -24,7 +24,11 @@ $count = updateData($table, $data, "ordersfood_id = '$ordersid' ");
 if ($count > 0) {
     $title = "هام";
     $body  =  "تم الانتهاء من تحضير الوجبة ";
-    sendNotifySpecificUser($userid, $title, $body, "", "ordersfoodscreenptwo");
+    if ($typeorders == "tableqrcode") {
+        sendNotifySpecificUser($userid, $title, $body, "", "ordersfoodscreenthree");
+    } else {
+        sendNotifySpecificUser($userid, $title, $body, "", "homeuser");
+    }
     $title = "هام";
     $body  =  "تم الانتهاء من تحضير الوجبة ";
     sendNotifySpecificRes($resid, $title, $body, "", "Rordersfoodscreentwo");
