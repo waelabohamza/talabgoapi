@@ -29,7 +29,7 @@ if ($count > 0) {
     sendNotifySpecificUser($userid, $title, $body, "", "homeuser");
     $title = "هام";
     $body  =  "تم توصيل الطلب رقم " . $ordersid . " بنجاح ";
-    sendNotifySpecificRes($resid, $title, $body, "", "Rordersfoodscreentwo");
+    sendNotifySpecificRes($resid, $title, $body, "", "Rhome");
 }
 
 countresault($count);
