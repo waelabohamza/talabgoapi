@@ -27,6 +27,7 @@ if ($count > 0){
     if ($orderstype == "delivery" || $orderstype == "deliveryspec"){
         $title = "هام";
         $body  =  "يوجد طلب بانتظار الموافقة"; 
+        sendGCM($title , $body , "" , "" , "Dordersscreen" , "delivery$resid");
     }
 }
 
