@@ -9,9 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
         $users    = $data['values'];
         $count    = $data['count'];
         if ($count > 0){
-            $count2 = insertToken($users['delivery_id'], $token, " delivery");
+            $count2 = insertToken($users['delivery_id'], $token, "delivery");
 
-            sendNotifySpecificDelviery($users['delivery_id'], "مرحيا", "مرحبا بك في تطبيق المطاعم الشامل", "", "");
+            sendNotifySpecificDelviery($users['delivery_id'], "مرحيا", "مرحبا بك في تطبيق TalabGo الشامل", "", "");
 
             echo json_encode(array("status" => "success", "users" => $users, "token" => $token));
         } else {

@@ -322,33 +322,59 @@ function deleteToken($sid, $token, $type)
 //  SEND NOTEFICATION API
 //=====================================================================================
 
-function sendGCM($title, $message, $fcm_id, $pageid, $pagename)
+function sendGCM($title, $message, $fcm_id, $pageid, $pagename, $topic = null)
 {
     //$message = utf8_decode($message);
 
     $url = 'https://fcm.googleapis.com/fcm/send';
 
-    $fields = array(
-        'registration_ids' => array(
-            $fcm_id
-        ),
-        'priority' => 'high',
-        'content_available' => true,
+    if ($topic  == null) {
 
-        'notification' => array(
-            "body" =>  $message,
-            "title" =>  $title,
-            "click_action" => "FLUTTER_NOTIFICATION_CLICK",
-            "sound" => "default"
+        $fields = array(
+            'registration_ids' => array(
+                $fcm_id
+            ),
+            'priority' => 'high',
+            'content_available' => true,
 
-        ),
-        'data' => array(
-            "pageid" => $pageid,
-            "pagename" => $pagename
-            //			'message' => 'Hello World!'
-        )
+            'notification' => array(
+                "body" =>  $message,
+                "title" =>  $title,
+                "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+                "sound" => "default"
 
-    );
+            ),
+            'data' => array(
+                "pageid" => $pageid,
+                "pagename" => $pagename
+                //			'message' => 'Hello World!'
+            )
+
+        );
+
+    } else {
+        $fields = array(
+            "to" => '/topics/'.$topic,
+            'priority' => 'high',
+            'content_available' => true,
+
+            'notification' => array(
+                "body" =>  $message,
+                "title" =>  $title,
+                "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+                "sound" => "default"
+
+            ),
+            'data' => array(
+                "pageid" => $pageid,
+                "pagename" => $pagename
+                //			'message' => 'Hello World!'
+            )
+
+        );
+    }
+
+
 
     $fields = json_encode($fields);
     $headers = array(
