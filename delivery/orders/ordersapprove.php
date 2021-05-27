@@ -35,6 +35,23 @@ if ($count > 0) {
   $title = "هام";
   $body  =  "تم الموافقة على الطلب  من قبل عامل التوصيل والان الطلب على الطريق";
   sendNotifySpecificRes($resid, $title, $body, "", "Rordersfoodscreenthree");
+
+
+
+  $stmt2 = $con->prepare("SELECT tokens.* FROM tokens 
+  INNER JOIN delivery ON delivery.delivery_id = tokens.tokens_sid 
+  WHERE tokens_sid != ? AND tokens_type = 'delivery' AND delivery.delivery_res = ?
+   -- الفكرة الاشخاص يلي بيشتغلو دليفري عن المطعم
+   ");
+  $stmt2->execute(array($deliveryid, $resid));
+  $delivers = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($delivers as $delivery) {
+    $token = $delivery['tokens_token'];
+    $title = "TalabGoDelivery";
+    $message =  "تم استلام الطلبية رقم  "  . $ordersid . " من قبل عامل توصيل اخر  ";
+    sendGCM($title, $message,  $token, "id", "Dordersscreen");
+    //
+  }
 }
 
 countresault($count);
