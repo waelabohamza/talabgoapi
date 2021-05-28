@@ -2,5 +2,10 @@
 
 include "../../connect.php" ; 
 
+$userid = superFilter($_POST['id']);  
 
-$userid = superFilter($_POST['usersid']);  
+$title = superFilter($_POST['title']) ; 
+
+$body = superFilter($_POST['body']) ; 
+
+sendNotifySpecificUser($userid , $title , $body , "" , "");
