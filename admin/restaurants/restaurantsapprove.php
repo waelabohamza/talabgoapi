@@ -5,12 +5,14 @@ include "../../connect.php";
 $table = "restaurants";
 
 // Request
+
 $resid  = superFilter($_POST['resid']);
  
-
-
-
 // ================
-$data = array("ordersfood_status" => 1);
 
-$count = updateData($table, $data, "ordersfood_id = '$ordersid' ");
+$data = array("restaurants_approve" => 1);
+
+$count = updateData($table, $data, "restaurants_id = '$resid'");
+
+
+countresault($count) ; 
