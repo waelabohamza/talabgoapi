@@ -5,13 +5,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
         $token    = $_POST['token'];
         $email    = superFilter($_POST['email']);
         $password = sha1($_POST['password']);
-        $data     = signInWithEmailAndPassword("delivery", "delivery_email", "delivery_password", $email, $password);
+        $data     = signInWithEmailAndPassword("admin", "admin_email", "admin_password", $email, $password);
         $users    = $data['values'];
         $count    = $data['count'];
         if ($count > 0){
-            $count2 = insertToken($users['delivery_id'], $token, "delivery");
+            $count2 = insertToken($users['admin_id'], $token, "admin");
 
-            sendNotifySpecificDelviery($users['delivery_id'], "مرحيا", "مرحبا بك في تطبيق TalabGo الشامل", "", "");
+            // sendNotifySpecificDelviery($users['admin_id'], "مرحيا", "مرحبا بك في تطبيق TalabGo الشامل", "", "");
 
             echo json_encode(array("status" => "success", "users" => $users, "token" => $token));
         } else {
