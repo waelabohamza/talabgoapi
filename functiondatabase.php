@@ -199,23 +199,14 @@ function signInWithEmailAndPassword($table, $columnemail, $columnpassword, $emai
 
 
 //===========================
-
-function deleteFile($filedir, $imageold)
-{
-
-    if (file_exists("../../upload/" . $filedir . "/" . $imageold)) {
-        unlink("../../upload/" . $filedir . "/" . $imageold);
+ 
+function deleteFile($filedir , $imageold){
+    if (file_exists($filedir)) {
+        unlink( $filedir . "/" . $imageold);
     }
 }
-
-function deleteFileOrders($filedir, $imageold)
-{
-
-    if (file_exists("../../api/upload/" . $filedir . "/" . $imageold)) {
-        unlink("../../api/upload/" . $filedir . "/" . $imageold);
-    }
-}
-
+ 
+ 
 // ==========================
 //  count fail or success
 // ==========================
