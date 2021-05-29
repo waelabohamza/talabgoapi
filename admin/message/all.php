@@ -1,10 +1,13 @@
-<?php 
+<?php
 
-include "../../connect.php" ; 
+include "../../connect.php";
 
-$type = superFilter($_POST['type']) ; 
+$type = superFilter($_POST['type']);
 
-$title = superFilter($_POST['title']); 
+$title = superFilter($_POST['title']);
 
-$body = superFilter($_POST['body']); 
+$body = superFilter($_POST['body']);
 
+sendGCM($title, $body, "", "", "", $type);
+
+successCount();
