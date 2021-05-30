@@ -199,13 +199,12 @@ function signInWithEmailAndPassword($table, $columnemail, $columnpassword, $emai
 
 
 //===========================
- 
-function deleteFile($filedir , $imageold){
-    if (file_exists($filedir)) {
-        unlink( $filedir . "/" . $imageold);
+
+function deleteFile($dir , $image){
+    if (file_exists($dir . "/" . $image)) {
+        unlink( $dir . "/" . $image);
     }
 }
- 
  
 // ==========================
 //  count fail or success
