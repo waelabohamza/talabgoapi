@@ -16,6 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $type           =  superFilter($_POST['type']);
     $email          =  superFilter($_POST['email']);
 
+    $minordersprice       =  superFilter($_POST['minordersprice']);
+    $maxdistance          =  superFilter($_POST['maxdistance']);
+
     $data = array(
         "restaurants_country"       => $country,
         "restaurants_area"          => $area,
@@ -23,7 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         "restaurants_timedelivery"  => $timedelivery,
         "restaurants_desc"          => $desc , 
         "restaurants_desc_ar"       => $descar , 
-        "restaurants_type"          => $type 
+        "restaurants_type"          => $type  , 
+        "restaurants_minpriceorders" => $minordersprice  , 
+        "restaurants_maxdistance" => $maxdistance
+
     );
 
     $count = updateData($table, $data, "restaurants_email = '$email'");
