@@ -20,7 +20,7 @@ INNER JOIN restaurants ON restaurants.restaurants_id = categoriesfood.categories
 
 
 CREATE view deliverywaysview AS
-SELECT deliveryways.* , rdtw.*, restaurants.restaurants_name FROM rdtw 
+SELECT deliveryways.* , rdtw.*, restaurants.restaurants_name  , restaurants.restaurants_lat , restaurants.restaurants_long ,  restaurants.restaurants_maxdistance  FROM rdtw 
 INNER JOIN  deliveryways ON deliveryways.deliveryways_id = rdtw.rdtw_deliveryways 
 INNER JOIN restaurants  ON restaurants.restaurants_id = rdtw.rdtw_res ; 
 
