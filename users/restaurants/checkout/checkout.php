@@ -40,7 +40,8 @@ $data = array(
     "ordersfood_long"       => $long,
     "ordersfood_totalprice" => $totalprice,
     "ordersfood_type"       => $typeDelivery , 
-    "ordersfood_table"       => $orderstable 
+    "ordersfood_table"       => $orderstable ,
+    "ordersfood_paymenttype" => "wallet"
 
 );
 

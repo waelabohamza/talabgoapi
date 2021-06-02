@@ -1,4 +1,5 @@
 <?php
+
 include "../../../connect.php";
 
 $data = json_decode(file_get_contents('php://input'), true);
@@ -23,11 +24,7 @@ if ($typeDelivery == "tableqrcode") {
     $orderstable       =  "0";
 }
 
-
 $usersprice = getDataColumn("users", "users_balance", "users_id", $userid);
-
-
-
 
 $data = array(
     "ordersfood_users"      => $userid,
@@ -38,7 +35,7 @@ $data = array(
     "ordersfood_totalprice" => $totalprice,
     "ordersfood_type"       => $typeDelivery,
     "ordersfood_table"       => $orderstable,
-    "ordersfood_paymenttype" => "1"
+    "ordersfood_paymenttype" => "cash"
 
 );
 
