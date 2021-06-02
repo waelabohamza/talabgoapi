@@ -3,7 +3,6 @@ include "../../../connect.php";
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-
 $lat           = superFilter($data['lat']);
 $long          = superFilter($data['long']);
 $userid        = superFilter($data['userid']);
