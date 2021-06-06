@@ -624,16 +624,16 @@ function image_data_multiple($imagerequset)
 }
 
 
-function image_upload_multiple($imagemultipe, $cat, $table,  $filedir)
+function image_upload_multiple($imagemultipe, $filedir , $numbercat,  $columnname , $columncat , $table)
 {
     for ($n = 0; $n < count($imagemultipe); $n++) {
         $imagename[$n] = $imagemultipe[$n]["name"];
         if (!$imagemultipe[$n]["name"] == "") {
             $imagetmp[$n]  = $imagemultipe[$n]["tmp"];
-            move_uploaded_file($imagetmp[$n], "../upload/" . $filedir . "/" . $imagename[$n]);
+            move_uploaded_file($imagetmp[$n], $filedir . "/" . $imagename[$n]);
             $data = array(
-                "imageitems_name"  => $imagename[$n],
-                "imageitems_items" => $cat
+                "$columnname"  => $imagename[$n],
+                "$columncat" => $numbercat
             );
             insertData($table, $data);
         }

@@ -1,7 +1,12 @@
 <?php
 
 include "connect.php" ; 
-$resid = "13" ; 
-$title = "a" ; 
-$body = "a" ; 
-sendGCM($title , $body , "" , "" , "Dordersscreen" , "delivery$resid");
+$msgerrors = array() ;
+$imagemultipe = image_data_multiple("files") ;
+// print_r($_FILES['files']['name'])  ;
+
+if (empty($msgerrors)) {
+
+    image_upload_multiple($imagemultipe, "upload/test" , '1',  "name" , 'cat' , "test") ; 
+
+}

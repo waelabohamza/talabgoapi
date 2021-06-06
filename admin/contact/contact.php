@@ -2,7 +2,7 @@
 
 include "../../connect.php" ; 
 
-$sid  = superFilter($_POST['id']) ; 
+  
 
 $type = superFilter($_POST['type']) ; 
 

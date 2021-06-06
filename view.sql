@@ -65,7 +65,7 @@ GROUP BY ordersfooddetails.ordersfooddetails_itemsid ;
 
 CREATE VIEW deliveryfoodview AS 
 SELECT delivery.* , restaurants.* FROM delivery 
-INNER JOIN restaurants ON restaurants.restaurants_id = delivery.delivery_res
+INNER JOIN restaurants ON restaurants.restaurants_id = delivery.delivery_res ; 
 
 
 CREATE VIEW ratingviewres AS
@@ -73,3 +73,15 @@ SELECT rating.rating_comment , rating.rating_sid , users.users_name FROM rating
 INNER JOIN users ON rating.rating_userid = users.users_id
 WHERE  
  rating_comment != 'empty' AND rating.rating_type = 'restaurants' ; 
+
+
+
+CREATE VIEW contactadminres AS 
+SELECT contact.* , restaurants.* FROM contact 
+INNER JOIN restaurants ON restaurants.restaurants_id = contact_sid 
+WHERE contact_stype = 'restaurants' AND contact_rtype = 'admin' ; 
+
+CREATE VIEW contactadminusers AS 
+SELECT contact.* , users.* FROM contact 
+INNER JOIN users ON users.users_id = contact_sid 
+WHERE contact_stype = 'users' AND contact_rtype = 'admin' ; 
