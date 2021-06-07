@@ -12,6 +12,6 @@ if (isset($_POST['type']) && $_POST['type'] == "all") {
     $and   = filterResualt($_POST['type'] ?? null, "restaurants_type");
 }
 
-$data  = getAllData($table, "1 = 1  $and $limit ");
+$data  = getAllData($table, "restaurants_approve = 1  $and $limit ");
 
 createJson($data['count'], $data['values']);

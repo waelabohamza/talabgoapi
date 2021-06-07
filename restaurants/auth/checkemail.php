@@ -19,7 +19,7 @@ if ($count > 0 ) {
 
     );
 
-    // sendEmail($email , "Verfiy Code" , " Code = '$code' ") ; 
+    sendEmail($email , "Verfiy Code" , " Code = '$code' ") ; 
 
     updateData("restaurants" , $datapass , "restaurants_email  = '$email' ");
 
