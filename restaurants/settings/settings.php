@@ -1,7 +1,7 @@
 <?php
 include "../../connect.php";
 
-$resid = $_POST['resid'];
+$resid = $_POST['id'];
 
 if (isset($_POST['email'])) {
 
