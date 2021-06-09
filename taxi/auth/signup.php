@@ -10,6 +10,24 @@ $verfiycode = rand(10000, 99999) ;
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
+   // ================== IMAGE  
+    
+    $image      = image_data("file");
+
+    $filetmp   =  $image['tmp'];
+
+    $imagerestaurantsname =  rand(0, 1000000) . "_" . $image['name'];
+     
+ 
+    $imagetwo      = image_data("filetwo");
+
+    $filetmptwo   =  $imagetwo['tmp'];
+
+    $imagelicencename =  rand(0, 1000000) . "_" . $imagetwo['name'];
+
+
+    // ===================
+
     $username = superFilter($_POST['username']);
 
     checkLength("username",  $username, 2, 100);
@@ -21,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email    = superFilter($_POST['email']);
 
     checkLength("email",  $email, 2, 100);
-
 
     $phone    = superFilter($_POST['phone']);
 

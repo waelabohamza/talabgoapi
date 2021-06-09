@@ -40,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if ($checkRes['count'] > 0) {
 
         failCount();
-
     } else {
 
         $data = array(
@@ -59,12 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             move_uploaded_file($filetmp, "../../upload/" . $filedir . "/"    .  $imagerestaurantsname);
             move_uploaded_file($filetmptwo, "../../upload/" . $filedir . "/"     . $imagelicencename);
-       
+            $count = insertData($table, $data);
+        } else {
+
+            failCount();
         }
-
-        $count = insertData($table, $data);
-
-        countresault($count) ; 
-        
     }
 }
