@@ -8,6 +8,8 @@ $msgerrors = array();
 
 $verfiycode = rand(10000, 99999) ; 
 
+$filedir = "taxi" ; 
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
    // ================== IMAGE  
@@ -16,14 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $filetmp   =  $image['tmp'];
 
-    $imagerestaurantsname =  rand(0, 1000000) . "_" . $image['name'];
+    $imagelicencename =  rand(0, 1000000) . "_" . $image['name'];
      
  
     $imagetwo      = image_data("filetwo");
 
     $filetmptwo   =  $imagetwo['tmp'];
 
-    $imagelicencename =  rand(0, 1000000) . "_" . $imagetwo['name'];
+    $imageimagetaxi =  rand(0, 1000000) . "_" . $imagetwo['name'];
 
 
     // ===================
@@ -54,13 +56,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     } else {
 
         if (empty($msgerrors)){
+
+            move_uploaded_file($filetmp, "../../upload/" . $filedir . "/"    .  $imagerestaurantsname);
+            move_uploaded_file($filetmptwo, "../../upload/" . $filedir . "/"     . $imagelicencename);
             
             $values = array(
                 "taxi_name" => $username,
                 "taxi_phone" => $phone,
                 "taxi_email" => $email,
                 "taxi_password" => $password,
-                "taxi_verfiycode" => $verfiycode
+                "taxi_verfiycode" => $verfiycode, 
+                "taxi_licence" => $imagelicencename , 
+                "taxi_image"  => $imageimagetaxi 
             );
 
             $countinsert  = insertData($table, $values);
