@@ -6,35 +6,39 @@ $table = "taxi";
 
 $msgerrors = array();
 
- 
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    $email    = superFilter($_POST['email']); 
+    $email    = superFilter($_POST['email']);
 
     // 
 
-    $type = superFilter($_POST['type'])  ; 
+    $type = superFilter($_POST['type']);
 
-    $year = superFilter($_POST['year']) ; 
+    $year = superFilter($_POST['year']);
 
-    $desc = superFilter($_POST['desc']) ;
+    $model = superFilter($_POST['model']);
+
+    $desc = superFilter($_POST['desc']);
+
+    $price = superFilter($_POST['price']);
+
+    $mincharge = superFilter($_POST['mincharge']);
 
     // 
- 
-    $data = getData("taxi", "taxi_email",  $email);
 
-    $count = $data['count'];
+    $data = array(
 
-    if ($count > 0){
+        "taxi_type"         => $type,
+        "taxi_year"         => $year,
+        "taxi_model"        => $model,
+        "taxi_description"  => $desc,
+        "taxi_price"        => $price,
+        "taxi_mincharge"    => $mincharge
 
-    
+    );
 
-    } else {
+    $count = updateData("taxi", $data, "taxi_email = '$email' ");
 
-        echo json_encode(array("status" => "fail", 
-                               "cause" => "email Or phone not exists", 
-                               "key" => "found"
-                              ));
-       
-    }
+    countresault($count);
 }
