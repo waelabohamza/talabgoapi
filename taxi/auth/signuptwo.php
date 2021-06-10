@@ -25,9 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $mincharge = superFilter($_POST['mincharge']);
 
-    $typedelivery = superFilter($_POST['typedelivery']) ; 
+    $typedelivery = superFilter($_POST['typedelivery']);
 
-    // 
+    // Multiple Files Upload 
+
+    $imagemultipe = image_data_multiple("files");
+ 
 
     $data = array(
 
@@ -36,12 +39,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         "taxi_model"        => $model,
         "taxi_description"  => $desc,
         "taxi_price"        => $price,
-        "taxi_mincharge"    => $mincharge , 
+        "taxi_mincharge"    => $mincharge,
         "taxi_typedelivery" => $typedelivery
 
     );
 
-    $count = updateData("taxi", $data, "taxi_email = '$email' ");
+    if (empty($msgerrors)) {
 
-    countresault($count);
+        image_upload_multiple($imagemultipe, "../../upload/taxi", '1',  "imagesgroup_name", 'imagesgroup_cat' , "imagesgroup_type" , "taxi", "imagesgroup");
+        $count = updateData("taxi", $data, "taxi_email = '$email' ");
+        countresault($count); 
+        
+    }else {
+        failCount() ; 
+    }
+
+ 
 }
