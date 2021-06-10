@@ -624,7 +624,7 @@ function image_data_multiple($imagerequset)
 }
 
 
-function image_upload_multiple($imagemultipe, $filedir , $numbercat,  $columnname , $columncat , $columntype  , $type, $table)
+function image_upload_multiple($imagemultipe, $filedir , $numbercat  , $type )
 {
     for ($n = 0; $n < count($imagemultipe); $n++) {
         $imagename[$n] = $imagemultipe[$n]["name"];
@@ -632,11 +632,11 @@ function image_upload_multiple($imagemultipe, $filedir , $numbercat,  $columnnam
             $imagetmp[$n]  = $imagemultipe[$n]["tmp"];
             move_uploaded_file($imagetmp[$n], $filedir . "/" . $imagename[$n]);
             $data = array(
-                "$columnname"  => $imagename[$n],
-                "$columncat" => $numbercat , 
-                "$columntype" => $type
+                "imagesgroup_name"  => $imagename[$n],
+                "imagesgroup_sid" => $numbercat , 
+                "imagesgroup_type" => $type
             );
-            insertData($table, $data);
+            insertData("imagesgroup", $data);
         }
     }
 }

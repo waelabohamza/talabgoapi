@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if (empty($msgerrors)) {
 
-        image_upload_multiple($imagemultipe, "../../upload/taxi", '1',  "imagesgroup_name", 'imagesgroup_cat' , "imagesgroup_type" , "taxi", "imagesgroup");
+        image_upload_multiple($imagemultipe, "../../upload/taxi" , '1' ,  "taxi");
         $count = updateData("taxi", $data, "taxi_email = '$email' ");
         countresault($count); 
         
