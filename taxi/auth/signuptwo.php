@@ -25,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $mincharge = superFilter($_POST['mincharge']);
 
+    $typedelivery = superFilter($_POST['typedelivery']) ; 
+
     // 
 
     $data = array(
@@ -34,7 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         "taxi_model"        => $model,
         "taxi_description"  => $desc,
         "taxi_price"        => $price,
-        "taxi_mincharge"    => $mincharge
+        "taxi_mincharge"    => $mincharge , 
+        "taxi_typedelivery" => $typedelivery
 
     );
 

@@ -12,16 +12,15 @@ $filedir = "taxi" ;
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-   // ================== IMAGE  
+   // ========================= IMAGE ======================== //
 
-   
    $imagetwo      = image_data("file");
 
    $filetmptwo   =  $imagetwo['tmp'];
 
    $imagetaxi =  rand(0, 1000000) . "_" . $imagetwo['name'];
 
-   //
+   // ========================================================= 
     
     $image      = image_data("filetwo");
 
@@ -29,7 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $imagelicencename =  rand(0, 1000000) . "_" . $image['name'];
 
-    // ===================
+    // =========================================================
+
+
 
     $username = superFilter($_POST['username']);
 
