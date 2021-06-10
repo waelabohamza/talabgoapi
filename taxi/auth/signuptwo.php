@@ -9,6 +9,8 @@ $msgerrors = array();
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
+    $ordersid  =  maxId("taxi_id", "taxi");
+
     $email    = superFilter($_POST['email']);
 
     // 
@@ -21,16 +23,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $desc = superFilter($_POST['desc']);
 
-    $price = superFilter($_POST['price']);
-
-    $mincharge = superFilter($_POST['mincharge']);
-
     $typedelivery = superFilter($_POST['typedelivery']);
+
+    $lat = superFilter($_POST['lat']);
+    
+    $long = superFilter($_POST['long']);
 
     // Multiple Files Upload 
 
     $imagemultipe = image_data_multiple("files");
- 
+
 
     $data = array(
 
@@ -38,21 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         "taxi_year"         => $year,
         "taxi_model"        => $model,
         "taxi_description"  => $desc,
-        "taxi_price"        => $price,
-        "taxi_mincharge"    => $mincharge,
-        "taxi_typedelivery" => $typedelivery
+        "taxi_typedelivery" => $typedelivery,
+        "taxi_lat"          => $lat,
+        "taxi_long"         => $long
 
     );
 
     if (empty($msgerrors)) {
 
-        image_upload_multiple($imagemultipe, "../../upload/taxi" , '1' ,  "taxi");
+        image_upload_multiple($imagemultipe, "../../upload/taxi", $ordersid,  "taxi");
         $count = updateData("taxi", $data, "taxi_email = '$email' ");
-        countresault($count); 
-        
-    }else {
-        failCount() ; 
+        countresault($count);
+    } else {
+        failCount();
     }
-
- 
 }
