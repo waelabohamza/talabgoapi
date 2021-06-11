@@ -85,3 +85,12 @@ CREATE VIEW contactadminusers AS
 SELECT contact.* , users.* FROM contact 
 INNER JOIN users ON users.users_id = contact_sid 
 WHERE contact_stype = 'users' AND contact_rtype = 'admin' ; 
+
+
+
+-- Important
+
+SELECT restaurants.* , AVG(rating.rating_value) AS avg  FROM restaurants 
+INNER JOIN rating ON rating.rating_sid = restaurants.restaurants_id
+UNION ALL 
+SELECT restaurants.* , 0 AS avg  FROM restaurants WHERE restaurants_id NOT IN (SELECT rating.rating_sid FROM rating WHERE rating.rating_sid = restaurants.restaurants_id) ; 
