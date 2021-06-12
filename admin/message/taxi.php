@@ -2,12 +2,12 @@
 
 include "../../connect.php" ; 
 
-$resid = superFilter($_POST['id']);  
+$taxiid = superFilter($_POST['id']);  
 
 $title = superFilter($_POST['title']) ; 
 
 $body = superFilter($_POST['body']); 
 
-sendNotifySpecificRes($resid , $title , $body , "" , "");
+sendNotifySpecificTaxi($taxiid , $title , $body , "" , "");
 
 successCount() ; 

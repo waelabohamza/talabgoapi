@@ -6,7 +6,7 @@ $table = "taxi";
 
 // Request
 
-$taxiid  = superFilter($_POST['taxiid']);
+$id  = superFilter($_POST['id']);
 
 $image = superFilter($_POST['image']) ; 
 
@@ -14,7 +14,7 @@ $licence = superFilter($_POST['licence']) ;
  
 // ================
 
-$count = deleteData($table , "taxi_id" , $resid); 
+$count = deleteData($table , "taxi_id" , $id); 
 
 if ($count > 0){
 

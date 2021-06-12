@@ -439,6 +439,22 @@ function sendNotifySpecificRes($resid, $title, $message, $p_id, $p_name)
 }
 
 
+function sendNotifySpecificTaxi($resid, $title, $message, $p_id, $p_name)
+{
+    global $con;
+    $stmt = $con->prepare("SELECT taxi.taxi_id , tokens.* FROM taxi
+                           INNER JOIN tokens ON tokens.tokens_sid = taxi.taxi_id
+                           WHERE taxi.taxi_id = ? AND tokens_type = 'taxi'
+                        ");
+    $stmt->execute(array($resid));
+    $ress = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($ress as $res) {
+        sendGCM($title, $message, $res['tokens_token'], $p_id, $p_name);
+    }
+    insertNotifySpecifcCatInDatabase($title, $message, "taxi", $resid);
+}
+
+
 
 
 //=======================================================================================
